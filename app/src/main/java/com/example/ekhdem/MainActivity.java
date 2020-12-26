@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ekhdem.common.common;
 import com.example.ekhdem.model.user;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 if(snapshot.child(phone.getText().toString()).exists()){
                     user user=snapshot.child(phone.getText().toString()).getValue(com.example.ekhdem.model.user.class);
                     if (user.getPassword().equals(password.getText().toString())){
-                        Toast.makeText(MainActivity.this , "login succes" , Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(MainActivity.this,Home.class);
+                        common.currentUser=user;
+                        startActivity(intent);
+                        finish();
                     }
                     else {
                         Toast.makeText(MainActivity.this,"failed",Toast.LENGTH_SHORT).show();
